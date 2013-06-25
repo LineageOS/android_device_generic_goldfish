@@ -1,0 +1,16 @@
+# SDK Add-on Manifest
+
+name=CyanogenMod
+name-id=cyanogenmod
+vendor=CyanogenMod
+vendor-id=cyanogenmod
+description=Android API ${PLATFORM_SDK_VERSION}, CyanogenMod ${CM_VERSION}
+
+# version of the Android platform on which this add-on is built.
+api=${PLATFORM_SDK_VERSION}
+
+# revision of the add-on
+revision=1
+
+SystemImage.Abi=armeabi-v7a
+SystemImage.GpuSupport=true

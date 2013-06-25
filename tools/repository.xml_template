@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdk:sdk-addon xmlns:sdk="http://schemas.android.com/sdk/android/addon/5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <sdk:add-on>
+    <sdk:name-id>cyanogenmod</sdk:name-id>
+    <sdk:name-display>CyanogenMod</sdk:name-display>
+    <sdk:api-level>API_LEVEL</sdk:api-level>
+    <sdk:vendor-id>cyanogenmod</sdk:vendor-id>
+    <sdk:vendor-display>CyanogenMod</sdk:vendor-display>
+    <sdk:revision>1</sdk:revision>
+    <sdk:description>Android API API_LEVEL, CyanogenMod CM_VERSION</sdk:description>
+    <sdk:desc-url>http://cyanogenmod.org</sdk:desc-url>
+    <sdk:archives>
+      <sdk:archive arch="any" os="any">
+        <sdk:size>SIZE</sdk:size>
+        <sdk:checksum type="sha1">SHA1</sdk:checksum>
+        <sdk:url>addon_cm-CM_VERSION.zip</sdk:url>
+      </sdk:archive>
+    </sdk:archives>
+    <sdk:libs>
+        </sdk:libs>
+  </sdk:add-on>
+</sdk:sdk-addon>
