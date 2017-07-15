@@ -11,7 +11,7 @@ $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 $(call inherit-product, device/generic/goldfish/goldfish.mk)
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_NAME := cm_goldfish
+PRODUCT_NAME := lineage_goldfish
 PRODUCT_DEVICE := generic
-PRODUCT_BRAND := CyanogenMod
-PRODUCT_MODEL := Full CyanogenMod on Emulator
+PRODUCT_BRAND := LineageOS
+PRODUCT_MODEL := Full LineageOS on Emulator
