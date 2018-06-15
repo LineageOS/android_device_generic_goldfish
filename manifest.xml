@@ -67,6 +67,7 @@
         <version>4.0</version>
         <interface>
             <name>IKeymasterDevice</name>
+            <instance>default</instance>
             <instance>strongbox</instance>
         </interface>
     </hal>
@@ -188,6 +189,15 @@
         <version>1.0</version>
         <interface>
             <name>IWifi</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.wifi.hostapd</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IHostapd</name>
             <instance>default</instance>
         </interface>
     </hal>
