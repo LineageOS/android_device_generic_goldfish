@@ -1,6 +1,6 @@
 
 PRODUCT_PROPERTY_OVERRIDES += \
-       vendor.rild.libpath=/vendor/lib/libreference-ril.so
+       vendor.rild.libpath=/vendor/lib/libgoldfish-ril.so
 
 # This is a build configuration for a full-featured build of the
 # Open-Source part of the tree. It's geared toward a US-centric
@@ -11,3 +11,5 @@ PRODUCT_COPY_FILES += \
     device/generic/goldfish/data/etc/encryptionkey.img:encryptionkey.img \
     prebuilts/qemu-kernel/x86_64/4.9/kernel-qemu2:kernel-ranchu-64
 
+PRODUCT_SHIPPING_API_LEVEL := 28
+TARGET_USES_MKE2FS := true
