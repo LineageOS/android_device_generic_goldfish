@@ -12,4 +12,3 @@ PRODUCT_COPY_FILES += \
     device/generic/goldfish/fstab.ranchu.arm:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.ranchu
 
 EMULATOR_VENDOR_NO_GNSS := true
-
