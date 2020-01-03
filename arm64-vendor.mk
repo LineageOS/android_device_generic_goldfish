@@ -10,5 +10,8 @@ PRODUCT_COPY_FILES += \
     development/sys-img/advancedFeatures.ini.arm:advancedFeatures.ini \
     prebuilts/qemu-kernel/arm64/4.4/kernel-qemu2:kernel-ranchu \
     device/generic/goldfish/fstab.ranchu.arm:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.ranchu
+PRODUCT_SDK_ADDON_COPY_FILES += \
+    development/sys-img/advancedFeatures.ini.arm:images/arm64-v8a/advancedFeatures.ini \
+    prebuilts/qemu-kernel/arm64/4.4/kernel-qemu2:images/arm64-v8a/kernel-ranchu
 
 EMULATOR_VENDOR_NO_GNSS := true
