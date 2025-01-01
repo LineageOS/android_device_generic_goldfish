@@ -1,7 +1,7 @@
 # Rules to generate a zip file that contains google emulator images
 # and other files for distribution
 
-ifneq ($(filter sdk_% gcar_%, $(TARGET_PRODUCT)),)
+ifneq ($(filter lineage_sdk_% sdk_% gcar_%, $(TARGET_PRODUCT)),)
 target_notice_file_txt := $(TARGET_OUT_INTERMEDIATES)/NOTICE.txt
 
 emulator_img_source_prop := $(TARGET_OUT_INTERMEDIATES)/source.properties
