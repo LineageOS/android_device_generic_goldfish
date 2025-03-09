@@ -33,7 +33,6 @@
 #include <sys/prctl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <libril/ril_ex.h>
 
 #if defined(PRODUCT_COMPATIBLE_PROPERTY)
 #define LIB_PATH_PROPERTY   "vendor.rild.libpath"
@@ -48,6 +47,11 @@ static void usage(const char *argv0) {
     fprintf(stderr, "Usage: %s -l <ril impl library> [-- <args for impl library>]\n", argv0);
     exit(EXIT_FAILURE);
 }
+
+typedef enum {
+    RIL_TELEPHONY_SOCKET,
+    RIL_SAP_SOCKET
+} RIL_SOCKET_TYPE;
 
 extern char ril_service_name_base[MAX_SERVICE_NAME_LENGTH];
 extern char ril_service_name[MAX_SERVICE_NAME_LENGTH];

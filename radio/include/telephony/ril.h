@@ -21,7 +21,6 @@
 #include <stdint.h>
 #include <telephony/ril_cdma_sms.h>
 #include <telephony/ril_nv_items.h>
-#include <telephony/ril_msim.h>
 
 #ifndef FEATURE_UNIT_TEST
 #include <sys/time.h>

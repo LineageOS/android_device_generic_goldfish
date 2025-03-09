@@ -15,3 +15,7 @@
 
 $(call inherit-product, device/generic/goldfish/product/handheld.mk)
 $(call inherit-product, device/generic/goldfish/product/base_phone.mk)
+
+PRODUCT_COPY_FILES += \
+    device/generic/goldfish/data/etc/advancedFeatures.ini:advancedFeatures.ini \
+    device/generic/goldfish/data/etc/config.ini.nexus5:config.ini

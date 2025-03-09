@@ -14,8 +14,8 @@
 # limitations under the License.
 
 $(call inherit-product, device/generic/goldfish/product/base_handheld.mk)
-# include webview
-$(call inherit-product, $(SRC_TARGET_DIR)/product/media_product.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/generic_system.mk)
+
 # don't include full handheld_system_Ext which includes SystemUi, Settings etc
 $(call inherit-product, $(SRC_TARGET_DIR)/product/media_system_ext.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_system_ext.mk)
@@ -32,3 +32,6 @@ PRODUCT_PACKAGES += \
 
 $(call inherit-product, device/generic/goldfish/product/generic.mk)
 
+PRODUCT_COPY_FILES += \
+    device/generic/goldfish/data/etc/advancedFeatures.ini:advancedFeatures.ini \
+    device/generic/goldfish/data/etc/config.ini.nexus5:config.ini

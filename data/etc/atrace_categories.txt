@@ -1,0 +1,11 @@
+memory
+ fastrpc/fastrpc_dma_stat
+ dmabuf_heap/dma_heap_stat
+ cma/cma_alloc_start
+ cma/cma_alloc_info
+ion
+ kmem/ion_alloc_buffer_start
+sched
+ scm/scm_call_start
+ scm/scm_call_end
+ systrace/0

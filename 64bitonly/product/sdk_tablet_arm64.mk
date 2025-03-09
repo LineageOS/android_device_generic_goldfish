@@ -16,18 +16,8 @@
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 EMULATOR_DISABLE_RADIO := true
 
-BOARD_EMULATOR_DYNAMIC_PARTITIONS_SIZE ?= $(shell expr 1536 \* 1048576 )
+BOARD_EMULATOR_DYNAMIC_PARTITIONS_SIZE ?= $(shell expr 1800 \* 1048576 )
 BOARD_SUPER_PARTITION_SIZE := $(shell expr $(BOARD_EMULATOR_DYNAMIC_PARTITIONS_SIZE) + 8388608 )  # +8M
-
-PRODUCT_COPY_FILES += \
-    device/generic/goldfish/tablet/data/etc/display_settings.xml:$(TARGET_COPY_OUT_VENDOR)/etc/display_settings.xml \
-    device/generic/goldfish/data/etc/advancedFeatures.ini.tablet:advancedFeatures.ini \
-    device/generic/goldfish/data/etc/config.ini.nexus7tab:config.ini
-
-PRODUCT_COPY_FILES+= \
-        device/generic/goldfish/data/etc/tablet_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
-
-PRODUCT_COPY_FILES += device/generic/goldfish/tablet/data/etc/tablet.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/tablet.xml
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 

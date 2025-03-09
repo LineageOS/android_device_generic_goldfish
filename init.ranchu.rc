@@ -19,9 +19,19 @@ on early-init
     setprop ro.opengles.version ${ro.boot.opengles.version}
     setprop dalvik.vm.heapsize ${ro.boot.dalvik.vm.heapsize:-192m}
     setprop dalvik.vm.checkjni ${ro.boot.dalvik.vm.checkjni}
-    setprop debug.hwui.renderer ${ro.boot.debug.hwui.renderer:-opengl}
+    # default skiagl: skia uses gles to render
+    # option skiavk: skia uses vulkan to render
+    setprop debug.hwui.renderer ${ro.boot.debug.hwui.renderer:-skiagl}
+    # default skiaglthreaded: skia uses gles to render in a separate thread
+    # option skiagl: skia uses gles to render
+    # option skiavk: skia uses vulkan to render
+    # option skiavkthreaded: skia uses vulkan to render in separate thread
+    # option empty: skia uses graphite
+    setprop debug.renderengine.backend ${ro.boot.debug.renderengine.backend:-skiaglthreaded}
     setprop debug.stagefright.ccodec ${ro.boot.debug.stagefright.ccodec}
     setprop debug.sf.nobootanimation ${ro.boot.debug.sf.nobootanimation}
+    setprop debug.angle.feature_overrides_enabled ${ro.boot.hardware.angle_feature_overrides_enabled}
+    setprop debug.angle.feature_overrides_disabled ${ro.boot.hardware.angle_feature_overrides_disabled}
     setprop vendor.qemu.dev.bootcomplete 0
 
     start vendor.dlkm_loader

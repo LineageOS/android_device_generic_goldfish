@@ -111,6 +111,10 @@ public abstract class ProvisionActivity extends Activity {
     }
 
     protected void provisionWifi(final String ssid) {
+        if (isVisibleBackgroundUser(getApplicationContext())) {
+            return;
+        }
+
         Settings.Global.putInt(getContentResolver(), Settings.Global.TETHER_OFFLOAD_DISABLED, 1);
 
         final WifiManager mWifiManager = getApplicationContext().getSystemService(WifiManager.class);
@@ -127,9 +131,10 @@ public abstract class ProvisionActivity extends Activity {
         config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_OPEN);
 
         final int netId = mWifiManager.addNetwork(config);
-
-        if (netId == ADD_NETWORK_FAIL || !mWifiManager.enableNetwork(netId, true)) {
+        if (netId == ADD_NETWORK_FAIL) {
             Log.e(TAG(), "Unable to add Wi-Fi network " + quotedSsid + ".");
+        } else if (!mWifiManager.enableNetwork(netId, true)) {
+            Log.e(TAG(), "Unable to enable Wi-Fi network " + quotedSsid + " (netId=" + netId + ")");
         }
     }
 
@@ -250,7 +255,7 @@ public abstract class ProvisionActivity extends Activity {
     }
 
     protected boolean provisionRequired() {
-        return true;
+        return Settings.Global.getInt(getContentResolver(), Settings.Global.DEVICE_PROVISIONED, 0) != 1;
     }
 
     protected boolean isVisibleBackgroundUser(Context context) {

@@ -35,8 +35,7 @@ cc_binary {
         "liblog",
         "libril-modem-lib",
     ],
-    // Temporary hack for broken vendor RILs.
-    whole_static_libs: ["librilutils-goldfish-fork"],
+    header_libs: ["goldfish_ril_headers"],
     relative_install_path: "hw",
     proprietary: true,
     overrides: ["rild"],

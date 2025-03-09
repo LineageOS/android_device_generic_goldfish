@@ -30,5 +30,6 @@ DeviceStateOnBoot = on
 HWCMultiConfigs = on
 VirtioSndCard = on
 DeviceKeyboardHasAssistKey = on
+Uwb = on
 Minigbm = on
 AndroidVirtualizationFramework = on

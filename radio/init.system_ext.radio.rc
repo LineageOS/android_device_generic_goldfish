@@ -1,0 +1,4 @@
+on post-fs-data
+    copy /vendor/etc/apns/apns-conf.xml /data/misc/apns/apns-conf.xml
+    chown system system /data/misc/apns/apns-conf.xml
+    chmod 0664 /data/misc/apns/apns-conf.xml

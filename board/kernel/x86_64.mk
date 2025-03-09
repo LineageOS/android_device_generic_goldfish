@@ -25,19 +25,22 @@ VIRTUAL_DEVICE_KERNEL_MODULES_PATH := \
 # The list of modules to reach the second stage. For performance reasons we
 # don't want to put all modules into the ramdisk.
 RAMDISK_KERNEL_MODULES := \
+    virtio_dma_buf.ko \
+    virtio-rng.ko \
+
+RAMDISK_SYSTEM_KERNEL_MODULES += \
     virtio_blk.ko \
     virtio_console.ko \
-    virtio_dma_buf.ko \
     virtio_pci.ko \
     virtio_pci_legacy_dev.ko \
     virtio_pci_modern_dev.ko \
-    virtio-rng.ko \
     vmw_vsock_virtio_transport.ko \
 
 BOARD_SYSTEM_KERNEL_MODULES := $(wildcard $(KERNEL_ARTIFACTS_PATH)/*.ko)
 
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES := \
-    $(patsubst %,$(VIRTUAL_DEVICE_KERNEL_MODULES_PATH)/%,$(RAMDISK_KERNEL_MODULES))
+    $(wildcard $(patsubst %,$(VIRTUAL_DEVICE_KERNEL_MODULES_PATH)/%,$(RAMDISK_KERNEL_MODULES))) \
+    $(wildcard $(patsubst %,$(KERNEL_ARTIFACTS_PATH)/%,$(RAMDISK_SYSTEM_KERNEL_MODULES)))
 
 BOARD_VENDOR_KERNEL_MODULES := \
     $(filter-out $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES),\

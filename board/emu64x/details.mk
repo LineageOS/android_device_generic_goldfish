@@ -19,13 +19,7 @@ include device/generic/goldfish/board/kernel/x86_64.mk
 PRODUCT_PROPERTY_OVERRIDES += \
        vendor.rild.libpath=/vendor/lib64/libgoldfish-ril.so
 
-ADVANCED_FEATURES_FILE := advancedFeatures.ini
-ifneq ($(filter %_minigbm, $(TARGET_PRODUCT)),)
-ADVANCED_FEATURES_FILE := advancedFeatures.ini.minigbm
-endif
-
 PRODUCT_COPY_FILES += \
-    device/generic/goldfish/data/etc/$(ADVANCED_FEATURES_FILE):advancedFeatures.ini \
     $(EMULATOR_KERNEL_FILE):kernel-ranchu \
     device/generic/goldfish/board/fstab/x86:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.ranchu \
     device/generic/goldfish/board/fstab/x86:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.ranchu \

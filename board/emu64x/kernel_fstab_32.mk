@@ -22,8 +22,3 @@ PRODUCT_COPY_FILES += \
     $(EMULATOR_KERNEL_FILE):kernel-ranchu-64 \
     device/generic/goldfish/board/fstab/x86:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.ranchu \
     device/generic/goldfish/board/fstab/x86:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.ranchu
-
-# advancedFeatures.ini should be removed from here in b/299636933
-PRODUCT_COPY_FILES += \
-    device/generic/goldfish/data/etc/advancedFeatures.ini:advancedFeatures.ini \
-

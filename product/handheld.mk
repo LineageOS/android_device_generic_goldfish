@@ -14,5 +14,6 @@
 # limitations under the License.
 
 $(call inherit-product, device/generic/goldfish/product/base_handheld.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/generic_system.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_system_ext.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)

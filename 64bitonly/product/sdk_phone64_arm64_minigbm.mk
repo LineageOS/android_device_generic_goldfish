@@ -16,7 +16,6 @@
 
 PRODUCT_COPY_FILES += \
     device/generic/goldfish/data/etc/advancedFeatures.ini.minigbm:advancedFeatures.ini \
-    device/generic/goldfish/data/etc/config.ini.nexus5:config.ini
 
 $(call inherit-product, device/generic/goldfish/64bitonly/product/sdk_phone64_arm64.mk)
 

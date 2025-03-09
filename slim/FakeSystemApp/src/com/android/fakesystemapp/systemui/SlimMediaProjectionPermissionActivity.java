@@ -33,6 +33,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.text.TextPaint;
 import android.util.Log;
+import android.view.Display;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -146,7 +147,7 @@ public class SlimMediaProjectionPermissionActivity extends Activity implements D
     private Intent getMediaProjectionIntent(int uid, String packageName)
             throws RemoteException {
         IMediaProjection projection = mService.createProjection(uid, packageName,
-                MediaProjectionManager.TYPE_SCREEN_CAPTURE, false /* permanentGrant */);
+                MediaProjectionManager.TYPE_SCREEN_CAPTURE, false /* permanentGrant */, Display.DEFAULT_DISPLAY);
         Intent intent = new Intent();
         intent.putExtra(MediaProjectionManager.EXTRA_MEDIA_PROJECTION, projection.asBinder());
         return intent;
