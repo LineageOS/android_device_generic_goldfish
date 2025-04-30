@@ -16,6 +16,23 @@
       "message": "Run fine as standalone and Android Studio",
       "revId": "7b96a96fbe91ec8be009f09aec82d7751351a2c7",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0775c70a_8570f35a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2025-04-30T18:24:39Z",
+      "side": 1,
+      "message": "what rule does it dup?",
+      "revId": "7b96a96fbe91ec8be009f09aec82d7751351a2c7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
