@@ -23,6 +23,8 @@ TARGET_BOOTLOADER_BOARD_NAME := goldfish_$(TARGET_ARCH)
 
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
+BUILD_BROKEN_DUP_RULES := true
+
 # Build OpenGLES emulation guest and host libraries
 BUILD_EMULATOR_OPENGL := true
 BUILD_QEMU_IMAGES := true
