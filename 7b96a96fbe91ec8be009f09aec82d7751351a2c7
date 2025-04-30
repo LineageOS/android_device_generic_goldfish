@@ -33,6 +33,24 @@
       "message": "what rule does it dup?",
       "revId": "7b96a96fbe91ec8be009f09aec82d7751351a2c7",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d57847b1_85b38d5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 30091
+      },
+      "writtenOn": "2025-04-30T20:02:37Z",
+      "side": 1,
+      "message": "[46/46] writing legacy Make module rules ...\nbuild/make/core/Makefile:730: warning: overriding commands for target `out/target/product/emu64x/obj/PACKAGING/depmod_vendor_ramdisk_stripped_intermediates/virtio_blk.ko\u0027\nbuild/make/core/Makefile:730: warning: ignoring old commands for target `out/target/product/emu64x/obj/PACKAGING/depmod_vendor_ramdisk_stripped_intermediates/virtio_blk.ko\u0027\nbuild/make/core/Makefile:730: warning: overriding commands for target `out/target/product/emu64x/obj/PACKAGING/depmod_vendor_ramdisk_stripped_intermediates/virtio_console.ko\u0027\nbuild/make/core/Makefile:730: warning: ignoring old commands for target `out/target/product/emu64x/obj/PACKAGING/depmod_vendor_ramdisk_stripped_intermediates/virtio_console.ko\u0027\nbuild/make/core/Makefile:730: warning: overriding commands for target `out/target/product/emu64x/obj/PACKAGING/depmod_vendor_ramdisk_stripped_intermediates/virtio_pci.ko\u0027\nbuild/make/core/Makefile:730: warning: ignoring old commands for target `out/target/product/emu64x/obj/PACKAGING/depmod_vendor_ramdisk_stripped_intermediates/virtio_pci.ko\u0027\nbuild/make/core/Makefile:730: warning: overriding commands for target `out/target/product/emu64x/obj/PACKAGING/depmod_vendor_ramdisk_stripped_intermediates/virtio_pci_legacy_dev.ko\u0027\nbuild/make/core/Makefile:730: warning: ignoring old commands for target `out/target/product/emu64x/obj/PACKAGING/depmod_vendor_ramdisk_stripped_intermediates/virtio_pci_legacy_dev.ko\u0027\nbuild/make/core/Makefile:730: warning: overriding commands for target `out/target/product/emu64x/obj/PACKAGING/depmod_vendor_ramdisk_stripped_intermediates/virtio_pci_modern_dev.ko\u0027\nbuild/make/core/Makefile:730: warning: ignoring old commands for target `out/target/product/emu64x/obj/PACKAGING/depmod_vendor_ramdisk_stripped_intermediates/virtio_pci_modern_dev.ko\u0027\nbuild/make/core/Makefile:730: warning: overriding commands for target `out/target/product/emu64x/obj/PACKAGING/depmod_vendor_ramdisk_stripped_intermediates/vmw_vsock_virtio_transport.ko\u0027\nbuild/make/core/Makefile:730: warning: ignoring old commands for target `out/target/product/emu64x/obj/PACKAGING/depmod_vendor_ramdisk_stripped_intermediates/vmw_vsock_virtio_transport.ko\u0027\nbuild/make/core/Makefile:730: warning: overriding commands for target `out/target/product/emu64x/vendor_ramdisk/lib/modules/virtio_blk.ko\u0027\nbuild/make/core/Makefile:730: warning: ignoring old commands for target `out/target/product/emu64x/vendor_ramdisk/lib/modules/virtio_blk.ko\u0027\nbuild/make/core/Makefile:730: warning: overriding commands for target `out/target/product/emu64x/vendor_ramdisk/lib/modules/virtio_console.ko\u0027\nbuild/make/core/Makefile:730: warning: ignoring old commands for target `out/target/product/emu64x/vendor_ramdisk/lib/modules/virtio_console.ko\u0027\nbuild/make/core/Makefile:730: warning: overriding commands for target `out/target/product/emu64x/vendor_ramdisk/lib/modules/virtio_pci.ko\u0027\nbuild/make/core/Makefile:730: warning: ignoring old commands for target `out/target/product/emu64x/vendor_ramdisk/lib/modules/virtio_pci.ko\u0027\nbuild/make/core/Makefile:730: warning: overriding commands for target `out/target/product/emu64x/vendor_ramdisk/lib/modules/virtio_pci_legacy_dev.ko\u0027\nbuild/make/core/Makefile:730: warning: ignoring old commands for target `out/target/product/emu64x/vendor_ramdisk/lib/modules/virtio_pci_legacy_dev.ko\u0027\nbuild/make/core/Makefile:730: warning: overriding commands for target `out/target/product/emu64x/vendor_ramdisk/lib/modules/virtio_pci_modern_dev.ko\u0027\nbuild/make/core/Makefile:730: warning: ignoring old commands for target `out/target/product/emu64x/vendor_ramdisk/lib/modules/virtio_pci_modern_dev.ko\u0027\nbuild/make/core/Makefile:730: warning: overriding commands for target `out/target/product/emu64x/vendor_ramdisk/lib/modules/vmw_vsock_virtio_transport.ko\u0027\nbuild/make/core/Makefile:730: warning: ignoring old commands for target `out/target/product/emu64x/vendor_ramdisk/lib/modules/vmw_vsock_virtio_transport.ko\u0027",
+      "parentUuid": "0775c70a_8570f35a",
+      "revId": "7b96a96fbe91ec8be009f09aec82d7751351a2c7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
