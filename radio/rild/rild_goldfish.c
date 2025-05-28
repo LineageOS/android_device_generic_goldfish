@@ -41,7 +41,7 @@
 #define LIB_PATH_PROPERTY   "rild.libpath"
 #define LIB_ARGS_PROPERTY   "rild.libargs"
 #endif
-#define MAX_LIB_ARGS        16
+#define MAX_LIB_ARGS        PROPERTY_VALUE_MAX
 
 static void usage(const char *argv0) {
     fprintf(stderr, "Usage: %s -l <ril impl library> [-- <args for impl library>]\n", argv0);
