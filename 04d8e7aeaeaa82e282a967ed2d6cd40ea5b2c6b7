@@ -16,6 +16,24 @@
       "message": "goldfish changes should be sent to AOSP",
       "revId": "04d8e7aeaeaa82e282a967ed2d6cd40ea5b2c6b7",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f11d4fd_36049e2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34887
+      },
+      "writtenOn": "2025-05-28T15:11:55Z",
+      "side": 1,
+      "message": "Apparently this file was removed in AOSP in I57ac1de075ff5b76aab4058e25dd6ff4bd2e1f81 which is why I couldn\u0027t duplicate this patch there originally.",
+      "parentUuid": "931e7730_9a4be86c",
+      "revId": "04d8e7aeaeaa82e282a967ed2d6cd40ea5b2c6b7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ],
   "submitRequirementResults": []
