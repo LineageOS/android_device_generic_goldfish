@@ -16,6 +16,23 @@
       "message": "please pick to 23 and upload there so this doesn\u0027t get missed, link that change here then we can merge",
       "revId": "7c7fcd2760a94e345b02844de3c79e1aff91b845",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "455dc7d9_81144480",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18796
+      },
+      "writtenOn": "2025-06-27T05:03:34Z",
+      "side": 1,
+      "message": "https://review.lineageos.org/c/LineageOS/android_device_generic_goldfish/+/433306",
+      "revId": "7c7fcd2760a94e345b02844de3c79e1aff91b845",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
