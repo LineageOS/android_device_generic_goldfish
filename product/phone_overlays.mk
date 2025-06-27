@@ -52,4 +52,3 @@ PRODUCT_PACKAGES += \
     EmulationPixel3aXLOverlay \
     SystemUIEmulationPixel3aXLOverlay \
     EmulationPixel2XLOverlay \
-    NavigationBarMode2ButtonOverlay \
