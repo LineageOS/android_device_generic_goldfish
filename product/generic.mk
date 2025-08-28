@@ -100,7 +100,6 @@ PRODUCT_PACKAGES += \
     SdkSetup \
     goldfish_overlay_connectivity_gsi \
     RanchuCommonOverlay \
-    libGoldfishProfiler \
     dlkm_loader
 
 ifneq ($(filter %_minigbm, $(TARGET_PRODUCT)),)
@@ -142,7 +141,6 @@ PRODUCT_PACKAGES += \
     lib_renderControl_enc \
     libEGL_emulation \
     libGLESv2_enc \
-    libvulkan_enc \
     libGLESv2_emulation \
     libGLESv1_enc \
     libEGL_angle \
