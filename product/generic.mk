@@ -244,8 +244,12 @@ endif
 # WiFi: vendor side
 PRODUCT_PACKAGES += \
     mac80211_create_radios \
-    hostapd \
     wpa_supplicant \
+
+ifneq ($(PRODUCT_IS_ATV),true)
+PRODUCT_PACKAGES += \
+    hostapd
+endif
 
 # Window Extensions
 $(call inherit-product, $(SRC_TARGET_DIR)/product/window_extensions.mk)
