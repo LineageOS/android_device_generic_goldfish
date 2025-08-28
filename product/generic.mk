@@ -249,7 +249,6 @@ endif
 # WiFi: vendor side
 PRODUCT_PACKAGES += \
     mac80211_create_radios \
-    hostapd \
     wpa_supplicant \
 
 # Window Extensions
