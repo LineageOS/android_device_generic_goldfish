@@ -16,6 +16,41 @@
       "message": "not needed anymore - works fine.",
       "revId": "ef1cdc54a34b5891a5abcb72ccef0e25e156f069",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaeec828_9ceb8610",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2025-09-20T08:08:29Z",
+      "side": 1,
+      "message": "it",
+      "revId": "ef1cdc54a34b5891a5abcb72ccef0e25e156f069",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48239a43_a4c56eab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2025-09-20T08:08:29Z",
+      "side": 1,
+      "message": "how does it work fine for you?\n\n```\nbuild/make/core/main.mk:1096: warning:  vendor/lineage/build/target/product/lineage_cf_phone_arm64.mk includes non-ex\nistent modules in PRODUCT_PACKAGES\nOffending entries:\nGbaService\nlibGLES_mesa\nlibGoldfishProfiler\nmetrics_helper\nsleep\n```",
+      "parentUuid": "65ed274d_09ad61b0",
+      "revId": "ef1cdc54a34b5891a5abcb72ccef0e25e156f069",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ],
   "submitRequirementResults": []
