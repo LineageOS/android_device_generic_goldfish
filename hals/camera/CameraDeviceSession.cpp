@@ -139,10 +139,10 @@ CaptureResult makeCaptureResult(const int frameNumber,
 }  // namespace
 
 CameraDeviceSession::CameraDeviceSession(
-        std::shared_ptr<CameraDevice> parent,
+        std::shared_ptr<CameraDevice> device,
         std::shared_ptr<ICameraDeviceCallback> cb,
         hw::HwCamera& hwCamera)
-         : mParent(std::move(parent))
+         : mDevice(std::move(device))
          , mCb(std::move(cb))
          , mHwCamera(hwCamera)
          , mRequestQueue(kMsgQueueSize, false)
@@ -225,18 +225,15 @@ ScopedAStatus CameraDeviceSession::configureStreams(
     }
 }
 
+ScopedAStatus CameraDeviceSession::configureStreamsV2(const StreamConfiguration& cfg,
+                                                      ConfigureStreamsRet* ret) {
+    return configureStreams(cfg, &ret->halStreams);
+}
+
 ScopedAStatus CameraDeviceSession::constructDefaultRequestSettings(
         const RequestTemplate tpl,
         CameraMetadata* metadata) {
-    auto maybeMetadata = serializeCameraMetadataMap(
-        mParent->constructDefaultRequestSettings(tpl));
-
-    if (maybeMetadata) {
-        *metadata = std::move(maybeMetadata.value());
-        return ScopedAStatus::ok();
-    } else {
-        return toScopedAStatus(Status::INTERNAL_ERROR);
-    }
+    return mDevice->constructDefaultRequestSettings(tpl, metadata);
 }
 
 ScopedAStatus CameraDeviceSession::flush() {
@@ -315,6 +312,7 @@ bool CameraDeviceSession::isStreamCombinationSupported(const StreamConfiguration
 void CameraDeviceSession::closeImpl() {
     flushImpl(std::chrono::steady_clock::now());
     mHwCamera.close();
+    mStreamBufferCache.clear();
 }
 
 void CameraDeviceSession::flushImpl(const std::chrono::steady_clock::time_point start) {

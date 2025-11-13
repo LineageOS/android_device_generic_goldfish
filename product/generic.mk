@@ -27,9 +27,7 @@ ifneq ($(EMULATOR_VENDOR_NO_MANIFEST_FILE),true)
 DEVICE_MANIFEST_FILE += device/generic/goldfish/manifest.xml
 endif
 
-PRODUCT_SOONG_NAMESPACES += \
-    device/generic/goldfish \
-    device/generic/goldfish-opengl
+PRODUCT_SOONG_NAMESPACES += device/generic/goldfish
 
 TARGET_USES_MKE2FS := true
 
@@ -198,11 +196,15 @@ endif
 
 ifneq ($(EMULATOR_VENDOR_NO_CAMERA),true)
 PRODUCT_SOONG_NAMESPACES += \
-    hardware/google/camera \
     hardware/google/camera/devices/EmulatedCamera \
 
+ifneq ($(filter %_minigbm, $(TARGET_PRODUCT)),)
+PRODUCT_PACKAGES += android.hardware.camera.provider.ranchu_minigbm
+else
+PRODUCT_PACKAGES += android.hardware.camera.provider.ranchu
+endif
+
 PRODUCT_PACKAGES += \
-    android.hardware.camera.provider.ranchu \
     android.hardware.camera.provider@2.7-service-google \
     libgooglecamerahwl_impl \
     android.hardware.camera.flash-autofocus.prebuilt.xml \
@@ -211,11 +213,10 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.full.prebuilt.xml \
     android.hardware.camera.raw.prebuilt.xml \
 
-PRODUCT_COPY_FILES += \
-    hardware/google/camera/devices/EmulatedCamera/hwl/configs/emu_camera_back.json:$(TARGET_COPY_OUT_VENDOR)/etc/config/emu_camera_back.json \
-    hardware/google/camera/devices/EmulatedCamera/hwl/configs/emu_camera_front.json:$(TARGET_COPY_OUT_VENDOR)/etc/config/emu_camera_front.json \
-    hardware/google/camera/devices/EmulatedCamera/hwl/configs/emu_camera_depth.json:$(TARGET_COPY_OUT_VENDOR)/etc/config/emu_camera_depth.json \
-
+PRODUCT_PACKAGES += \
+    emu_camera_back.json \
+    emu_camera_front.json \
+    emu_camera_depth.json
 endif
 
 ifneq ($(EMULATOR_VENDOR_NO_SOUND),true)
@@ -285,7 +286,6 @@ PRODUCT_COPY_FILES += \
     device/generic/goldfish/codecs/media/profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
     device/generic/goldfish/codecs/media/codecs_google_video_default.xml:${TARGET_COPY_OUT_VENDOR}/etc/media_codecs_google_video.xml \
     device/generic/goldfish/codecs/media/codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
-    device/generic/goldfish/codecs/media/codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
     device/generic/goldfish/codecs/media/$(CODECS_PERFORMANCE_C2_PROFILE):$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance_c2.xml \
 
 
@@ -296,13 +296,13 @@ PRODUCT_COPY_FILES += \
     device/generic/goldfish/data/etc/atrace_categories.txt:$(TARGET_COPY_OUT_VENDOR)/etc/atrace/atrace_categories.txt \
     device/generic/goldfish/emulator-info.txt:data/misc/emulator/version.txt \
     device/generic/goldfish/data/etc/local.prop:data/local.prop \
-    device/generic/goldfish/init.ranchu.adb.setup.sh:$(TARGET_COPY_OUT_SYSTEM_EXT)/bin/init.ranchu.adb.setup.sh \
-    device/generic/goldfish/init_ranchu_device_state.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init_ranchu_device_state.sh \
-    device/generic/goldfish/init.ranchu-core.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.ranchu-core.sh \
-    device/generic/goldfish/init.ranchu-net.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.ranchu-net.sh \
-    device/generic/goldfish/init.ranchu.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.ranchu.rc \
-    device/generic/goldfish/init.system_ext.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.system_ext.rc \
-    device/generic/goldfish/ueventd.ranchu.rc:$(TARGET_COPY_OUT_VENDOR)/etc/ueventd.rc \
+    device/generic/goldfish/init/init.adb-setup.ranchu.sh:$(TARGET_COPY_OUT_SYSTEM_EXT)/bin/init.adb-setup.ranchu.sh \
+    device/generic/goldfish/init/init.device-state.ranchu.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.device-state.ranchu.sh \
+    device/generic/goldfish/init/init.net.ranchu.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.net.ranchu.sh \
+    device/generic/goldfish/init/init.setup.ranchu.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.setup.ranchu.sh \
+    device/generic/goldfish/init/init.ranchu.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.ranchu.rc \
+    device/generic/goldfish/init/init.system_ext.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.system_ext.rc \
+    device/generic/goldfish/init/ueventd.rc:$(TARGET_COPY_OUT_VENDOR)/etc/ueventd.rc \
     device/generic/goldfish/input/virtio_input_rotary.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/virtio_input_rotary.idc \
     device/generic/goldfish/input/qwerty2.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/qwerty2.idc \
     device/generic/goldfish/input/qwerty2.kcm:$(TARGET_COPY_OUT_VENDOR)/usr/keychars/qwerty2.kcm \
@@ -338,3 +338,5 @@ PRODUCT_COPY_FILES += \
 
 # Goldfish uses 6.X kernels.
 PRODUCT_ENABLE_UFFD_GC := true
+
+PRODUCT_ENFORCE_SELINUX_TREBLE_LABELING := true
