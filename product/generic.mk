@@ -205,7 +205,7 @@ PRODUCT_PACKAGES += android.hardware.camera.provider.ranchu
 endif
 
 PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.7-service-google \
+    com.google.emulated.camera.provider.hal \
     libgooglecamerahwl_impl \
     android.hardware.camera.flash-autofocus.prebuilt.xml \
     android.hardware.camera.concurrent.prebuilt.xml \
