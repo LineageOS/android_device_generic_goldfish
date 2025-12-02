@@ -16,6 +16,24 @@
       "message": "https://github.com/LineageOS/android_hardware_google_camera/blob/lineage-23.1/common/hal/aidl_service/Android.bp#L131 it\u0027s still there though",
       "revId": "989413fa7f7d86575671e7b6aebc80f41553d168",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01ba1932_fa8088fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2025-12-02T22:55:34Z",
+      "side": 1,
+      "message": "ah, they just removed namespace for it. this change is fine anyway, I vaguely remember testing it too.",
+      "parentUuid": "a3e6daa6_9fceed6e",
+      "revId": "989413fa7f7d86575671e7b6aebc80f41553d168",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ],
   "submitRequirementResults": []
