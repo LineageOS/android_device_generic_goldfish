@@ -72,6 +72,10 @@ emu_img_zip: $(INTERNAL_EMULATOR_PACKAGE_TARGET)
 .PHONY: goog_emu_imgs
 goog_emu_imgs: emu_img_zip
 
+# The following rule generates an emulator manifest sdk-repo-sys-img.xml file.
+# Enable only when goog_emu_imgs is in MAKECMDGOALS.
+-include vendor/auto/embedded/products/packaging/aaos_emulator_bundle_xml.mk
+
 # The following rules generate emu_extra_imgs package. It is similar to
 # emu_img_zip, but it does not contain system-qemu.img and vendor-qemu.img. It
 # conatins the necessary data to build the qemu images. The package can be

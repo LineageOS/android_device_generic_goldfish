@@ -205,6 +205,10 @@ Event MultihalSensors::activationOnChangeSensorEvent(const int32_t sensorHandle,
         payload->heartRate.bpm = 0;
         break;
 
+    case SensorType::WRIST_TILT_GESTURE:
+        payload->scalar = 1.0f;
+        break;
+
     case SensorType::HINGE_ANGLE:
         switch (sensorHandle) {
         case kSensorHandleHingeAngle0:

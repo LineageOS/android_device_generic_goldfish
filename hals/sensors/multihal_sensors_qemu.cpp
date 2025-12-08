@@ -353,7 +353,7 @@ void MultihalSensors::parseQemuSensorEventLocked(QemuSensorsProtocolState* state
                          weigthedAverage(state->timeBiasNs, 3, timeBiasNs, 1));
             parsed = true;
         }
-    } else if (const char* values = testPrefix(buf, end, "sync", ':')) {
+    } else if (testPrefix(buf, end, "sync", ':')) {
         parsed = true;
     }
 

@@ -179,6 +179,24 @@ ScopedAStatus RadioConfig::setSimSlotsMapping(
     return ScopedAStatus::ok();
 }
 
+ScopedAStatus RadioConfig::getSimTypeInfo(int32_t serial) {
+    config::SimTypeInfo sti = {
+        .currentSimType = config::SimType::PHYSICAL,
+        .supportedSimTypes = static_cast<int>(config::SimType::PHYSICAL),
+    };
+
+    NOT_NULL(mRadioConfigResponse)->getSimTypeInfoResponse(
+        makeRadioResponseInfo(serial), {std::move(sti)});
+    return ScopedAStatus::ok();
+}
+
+ScopedAStatus RadioConfig::setSimType(int32_t serial, const std::vector<config::SimType>& /*simTypes*/) {
+    NOT_NULL(mRadioConfigResponse)->setSimTypeResponse(
+        makeRadioResponseInfoUnsupported(
+            serial, FAILURE_DEBUG_PREFIX, __func__));
+    return ScopedAStatus::ok();
+}
+
 void RadioConfig::atResponseSink(const AtResponsePtr& response) {
     if (!mAtConversation.send(response)) {
         response->visit([this](const auto& msg){ handleUnsolicited(msg); });

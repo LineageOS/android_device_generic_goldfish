@@ -7,5 +7,4 @@ dontaudit dumpstate kernel:system module_request;
 
 dontaudit dumpstate device:file { open write };
 dontaudit dumpstate varrun_file:dir search;
-allow dumpstate vold:binder call;
 dontaudit dumpstate apexd:binder call;

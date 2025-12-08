@@ -257,7 +257,7 @@ ScopedAStatus RadioData::setupDataCall(const int32_t serial,
 
 failed:     releaseId(cid);
             NOT_NULL(mRadioDataResponse)->setupDataCallResponse(
-                    makeRadioResponseInfo(serial, FAILURE(status)), {});
+                    makeRadioResponseInfo(serial, status), {});
             return status != RadioError::INTERNAL_ERR;
         }
 
@@ -405,7 +405,14 @@ ScopedAStatus RadioData::cancelHandover(const int32_t serial,
 }
 
 ScopedAStatus RadioData::startKeepalive(const int32_t serial,
-                                        const data::KeepaliveRequest& /*keepalive*/) {
+                                        const data::KeepaliveRequest& keepaliveReq) {
+    const RadioError keepAliveReqCheck = validateKeepaliveRequest(keepaliveReq);
+    if (keepAliveReqCheck != RadioError::NONE) {
+        NOT_NULL(mRadioDataResponse)->startKeepaliveResponse(
+            makeRadioResponseInfo(serial, keepAliveReqCheck), {});
+        return ScopedAStatus::ok();
+    }
+
     const int32_t sessionHandle = allocateId();
 
     {
@@ -443,6 +450,27 @@ ScopedAStatus RadioData::stopKeepalive(const int32_t serial,
     return ScopedAStatus::ok();
 }
 
+ScopedAStatus RadioData::setUserDataEnabled(int32_t serial, bool /*enabled*/) {
+    NOT_NULL(mRadioDataResponse)->setUserDataEnabledResponse(
+        makeRadioResponseInfoUnsupported(serial, FAILURE_DEBUG_PREFIX, __func__));
+    return ScopedAStatus::ok();
+}
+
+ScopedAStatus RadioData::setUserDataRoamingEnabled(int32_t serial, bool /*enabled*/) {
+    NOT_NULL(mRadioDataResponse)->setUserDataRoamingEnabledResponse(
+        makeRadioResponseInfoUnsupported(serial, FAILURE_DEBUG_PREFIX, __func__));
+    return ScopedAStatus::ok();
+}
+
+ScopedAStatus RadioData::notifyImsDataNetwork(int32_t serial, AccessNetwork /*accessNetwork*/,
+                                              data::DataNetworkState /*dataNetworkState*/,
+                                              data::TransportType /*physicalTransportType*/,
+                                              int32_t /*physicalNetworkModemId*/) {
+    NOT_NULL(mRadioDataResponse)->notifyImsDataNetworkResponse(
+        makeRadioResponseInfoNOP(serial));
+    return ScopedAStatus::ok();
+}
+
 ScopedAStatus RadioData::responseAcknowledgement() {
     return ScopedAStatus::ok();
 }
@@ -469,6 +497,34 @@ int32_t RadioData::allocateId() {
 void RadioData::releaseId(const int32_t cid) {
     std::lock_guard<std::mutex> lock(mMtx);
     mIdAllocator.put(cid);
+}
+
+RadioError RadioData::validateKeepaliveRequest(const data::KeepaliveRequest& keepaliveReq) const {
+    using data::KeepaliveRequest;
+
+    switch (keepaliveReq.type) {
+    case KeepaliveRequest::TYPE_NATT_IPV4:
+        if ((keepaliveReq.sourceAddress.size() != 4) || (keepaliveReq.destinationAddress.size() != 4)) {
+            return RadioError::INVALID_ARGUMENTS;
+        }
+        break;
+
+    case KeepaliveRequest::TYPE_NATT_IPV6:
+        if ((keepaliveReq.sourceAddress.size() != 16) || (keepaliveReq.destinationAddress.size() != 16)) {
+            return RadioError::INVALID_ARGUMENTS;
+        }
+        break;
+
+    default:
+        return RadioError::REQUEST_NOT_SUPPORTED;
+    }
+
+    std::lock_guard<std::mutex> lock(mMtx);
+    if (!mDataCalls.count(keepaliveReq.cid)) {
+        return RadioError::INVALID_ARGUMENTS;
+    }
+
+    return RadioError::NONE;
 }
 
 std::vector<SetupDataCallResult> RadioData::getDataCalls() const {

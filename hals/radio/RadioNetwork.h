@@ -96,6 +96,9 @@ struct RadioNetwork : public network::BnRadioNetwork {
                                                            bool enabled) override;
     ScopedAStatus setSecurityAlgorithmsUpdatedEnabled(int32_t serial, bool enabled) override;
     ScopedAStatus isSecurityAlgorithmsUpdatedEnabled(int32_t serial) override;
+    ScopedAStatus setSatellitePlmn(int32_t serial, const std::vector<std::string>& carrierPlmnArray, const std::vector<std::string>& allSatellitePlmnArray) override;
+    ScopedAStatus setSatelliteEnabledForCarrier(int32_t serial, bool satelliteEnabled) override;
+    ScopedAStatus isSatelliteEnabledForCarrier(int32_t serial) override;
 
     void atResponseSink(const AtResponsePtr& response);
     void handleUnsolicited(const AtResponse::CFUN&);
@@ -114,6 +117,10 @@ struct RadioNetwork : public network::BnRadioNetwork {
             const std::shared_ptr<network::IRadioNetworkIndication>& radioNetworkIndication) override;
 
 private:
+    static RadioError validateSignalStrengthReportingCriteria(
+            const std::vector<network::SignalThresholdInfo>& signalThresholdInfos);
+    static RadioError validateNetworkScanRequest(const network::NetworkScanRequest&);
+
     const std::shared_ptr<AtChannel> mAtChannel;
     AtChannel::Conversation mAtConversation;
     std::shared_ptr<network::IRadioNetworkResponse> mRadioNetworkResponse;
@@ -128,6 +135,7 @@ private:
     AtResponse::CTZV    mCtzv;
     int64_t             mCtzvTimestamp;
     modem::RadioState   mRadioState = modem::RadioState::OFF;
+    network::UsageSetting mUsageSetting = network::UsageSetting::VOICE_CENTRIC;
     int                 mPrimaryBandwidth = 0;
     int                 mSecondaryBandwidth = 0;
     bool                mNullCipherAndIntegrityEnabled = false;

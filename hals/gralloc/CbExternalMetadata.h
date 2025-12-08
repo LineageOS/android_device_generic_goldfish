@@ -41,6 +41,7 @@ struct CbExternalMetadata {
 
     uint64_t    magic;
     uint64_t    bufferID;
+    uint64_t    totalAllocationSize;
     PlaneLayout planeLayout[3];
     PlaneLayoutComponent planeLayoutComponent[4];
     Smpte2086   smpte2086;
@@ -59,7 +60,7 @@ struct CbExternalMetadata {
     bool        has_cta861_3;
 
     char        name[127];
-    char        unused[1];
+    char        unused[9];
 };
 
 static_assert((sizeof(CbExternalMetadata) % 16) == 0);

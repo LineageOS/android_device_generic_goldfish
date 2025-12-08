@@ -18,6 +18,7 @@
 
 #include <charconv>
 #include <format>
+#include <thread>
 
 #include "RadioModem.h"
 
@@ -87,7 +88,6 @@ ScopedAStatus RadioModem::getImei(const int32_t serial) {
 }
 
 ScopedAStatus RadioModem::getHardwareConfig(const int32_t serial) {
-    static const char* const kFunc = __func__;
     mAtChannel->queueRequester([this, serial](const AtChannel::RequestPipe requestPipe) -> bool {
         using modem::HardwareConfig;
         using modem::HardwareConfigModem;
@@ -165,7 +165,6 @@ ScopedAStatus RadioModem::getModemStackStatus(const int32_t serial) {
 }
 
 ScopedAStatus RadioModem::getRadioCapability(const int32_t serial) {
-    static const char* const kFunc = __func__;
     mAtChannel->queueRequester([this, serial](const AtChannel::RequestPipe requestPipe) -> bool {
         using modem::RadioCapability;
         RadioCapability cap;
@@ -221,8 +220,8 @@ ScopedAStatus RadioModem::setRadioCapability(const int32_t serial,
 }
 
 ScopedAStatus RadioModem::setRadioPower(const int32_t serial, const bool powerOn,
-                                        const bool forEmergencyCall,
-                                        const bool preferredForEmergencyCall) {
+                                        const bool /*forEmergencyCall*/,
+                                        const bool /*preferredForEmergencyCall*/) {
     mAtChannel->queueRequester([this, serial, powerOn]
                                (const AtChannel::RequestPipe requestPipe) -> bool {
         if (setRadioPowerImpl(requestPipe, powerOn)) {
@@ -232,6 +231,30 @@ ScopedAStatus RadioModem::setRadioPower(const int32_t serial, const bool powerOn
         } else {
             return false;
         }
+    });
+
+    return ScopedAStatus::ok();
+}
+
+ScopedAStatus RadioModem::nvResetConfig(const int32_t serial, const modem::ResetNvType resetNvType) {
+    if (resetNvType != modem::ResetNvType::RELOAD) {
+        NOT_NULL(mRadioModemResponse)->nvResetConfigResponse(
+            makeRadioResponseInfoDeprecated(serial));
+        return ScopedAStatus::ok();
+    }
+
+    mAtChannel->queueRequester([this, serial]
+                               (const AtChannel::RequestPipe requestPipe) -> bool {
+        using namespace std::chrono_literals;
+
+        setRadioPowerImpl(requestPipe, false);
+        std::this_thread::sleep_for(5s);
+        setRadioPowerImpl(requestPipe, true);
+
+        NOT_NULL(mRadioModemResponse)->nvResetConfigResponse(
+            makeRadioResponseInfo(serial));
+
+        return true;
     });
 
     return ScopedAStatus::ok();
@@ -285,7 +308,6 @@ ScopedAStatus RadioModem::setResponseFunctions(
 std::pair<RadioError, uint32_t> RadioModem::getSupportedRadioTechs(
             const AtChannel::RequestPipe requestPipe,
             AtChannel::Conversation& atConversation) {
-    using ParseError = AtResponse::ParseError;
     using CTEC = AtResponse::CTEC;
     using ratUtils::ModemTechnology;
 
@@ -322,13 +344,22 @@ bool RadioModem::setRadioPowerImpl(const AtChannel::RequestPipe requestPipe,
         }
     }
 
-    const std::string request = std::format("AT+CFUN={0:d}", powerOn ? 1 : 0);
-    if (!requestPipe(request)) {
+    AtResponsePtr response =
+        mAtConversation(requestPipe, std::format("AT+CFUN={0:d}", powerOn ? 1 : 0),
+                        [](const AtResponse& response) -> bool {
+                            return response.holds<AtResponse::OK>();
+                        });
+    if (!response) {
         return FAILURE(false);
     }
 
     // to broadcast CFUN from the listening thread
-    if (!requestPipe(atCmds::getModemPowerState)) {
+    response =
+        mAtConversation(requestPipe, atCmds::getModemPowerState,
+                        [](const AtResponse& response) -> bool {
+                            return response.holds<AtResponse::CFUN>();
+                        });
+    if (!response) {
         return FAILURE(false);
     }
 
@@ -359,12 +390,6 @@ ScopedAStatus RadioModem::getDeviceIdentity(const int32_t serial) {
 ScopedAStatus RadioModem::nvReadItem(const int32_t serial, modem::NvItem) {
     NOT_NULL(mRadioModemResponse)->nvReadItemResponse(
         makeRadioResponseInfoDeprecated(serial), "");
-    return ScopedAStatus::ok();
-}
-
-ScopedAStatus RadioModem::nvResetConfig(const int32_t serial, modem::ResetNvType) {
-    NOT_NULL(mRadioModemResponse)->nvResetConfigResponse(
-        makeRadioResponseInfoDeprecated(serial));
     return ScopedAStatus::ok();
 }
 

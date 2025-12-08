@@ -751,7 +751,7 @@ private:
 
         case StandardMetadataType::ALLOCATION_SIZE:
             putMetadataHeader(writer, standardMetadataType)
-                .write<uint64_t>(cb.mmapedSize);
+                .write<uint64_t>(metadata.totalAllocationSize);
             break;
 
         case StandardMetadataType::PROTECTED_CONTENT:
